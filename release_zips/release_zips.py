@@ -41,7 +41,7 @@ def main():
     subprocess.run(["git", "clone", "--recursive", "--branch", tag, git_url, directory], check=True)
 
     zipfile = "{}.zip".format(directory)
-    print("Zipping github {}...".format(zipfile))
+    print("Zipping github files into source-{}...".format(zipfile))
     subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "source-" + zipfile, directory], check=True)
 
     # remove all github and other not needed files for using IDF
@@ -50,7 +50,6 @@ def main():
     shutil.rmtree(directory + "/.gitlab", ignore_errors=True)
     shutil.rmtree(directory + "/docs", ignore_errors=True)
 
-    print ("directory: ", directory)
     fileList = glob.glob(directory + "/.*")
     for filePath in fileList:
         try:
@@ -58,7 +57,7 @@ def main():
         except:
             print("Error while deleting file : ", filePath)
 
-    print("Zipping only needed files {}...".format(zipfile))
+    print("Zipping only needed files into {}...".format(zipfile))
     subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", zipfile, directory], check=True)
 
     try:
