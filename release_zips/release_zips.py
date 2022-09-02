@@ -48,9 +48,9 @@ def main():
     shutil.rmtree(directory + "/.git", ignore_errors=True)
     shutil.rmtree(directory + "/.github", ignore_errors=True)
     shutil.rmtree(directory + "/.gitlab", ignore_errors=True)
-    shutil.rmtree(directory + "/.docs", ignore_errors=True)
+    shutil.rmtree(directory + "/docs", ignore_errors=True)
 
-    files = glob.glob(".*")
+    files = glob.glob(directory + ".*")
     for f in files:
         try:
             f.unlink()
