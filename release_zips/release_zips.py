@@ -51,6 +51,7 @@ def main():
     shutil.rmtree(directory + "/docs", ignore_errors=True)
 
     files = glob.glob(directory + ".*")
+    print("Files: " files)
     for f in files:
         try:
             f.unlink()
