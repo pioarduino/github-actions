@@ -42,7 +42,7 @@ def main():
 
     zipfile = "{}.zip".format(directory)
     print("Zipping github {}...".format(zipfile))
-    subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "source" + zipfile, directory], check=True)
+    subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "source-" + zipfile, directory], check=True)
 
     # remove all github and other not needed files for using IDF
     shutil.rmtree(directory + "/.git", ignore_errors=True)
@@ -77,7 +77,7 @@ def main():
                                           draft=True, prerelease=is_prerelease)
 
     print("Attaching zipfile(s)...")
-    release.upload_asset("source" + zipfile)
+    release.upload_asset("source-" + zipfile)
     release.upload_asset(zipfile)
 
     print("Release URL is {}".format(release.html_url)
@@ -85,4 +85,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
