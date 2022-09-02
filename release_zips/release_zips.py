@@ -2,6 +2,8 @@
 
 from github import Github, GithubException
 import os
+import shutil
+import glob
 import subprocess
 
 
@@ -39,7 +41,23 @@ def main():
     subprocess.run(["git", "clone", "--recursive", "--branch", tag, git_url, directory], check=True)
 
     zipfile = "{}.zip".format(directory)
-    print("Zipping {}...".format(zipfile))
+    print("Zipping github {}...".format(zipfile))
+    subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "source" + zipfile, directory], check=True)
+
+    # remove all github and other not needed files for using IDF
+    shutil.rmtree()(directory + (os.path.sep) + ".git")
+    shutil.rmtree()(directory + (os.path.sep) + ".github")
+    shutil.rmtree()(directory + (os.path.sep) + ".gitlab")
+    shutil.rmtree()(directory + (os.path.sep) + ".docs")
+
+    files = glob.glob(".*")
+    for f in files:
+        try:
+            f.unlink()
+        except OSError as e:
+            print("Error: %s : %s" % (f, e.strerror))
+
+    print("Zipping only needed files {}...".format(zipfile))
     subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", zipfile, directory], check=True)
 
     try:
@@ -58,7 +76,8 @@ def main():
                                           "(Draft created by Action)",
                                           draft=True, prerelease=is_prerelease)
 
-    print("Attaching zipfile...")
+    print("Attaching zipfile(s)...")
+    release.upload_asset("source" + zipfile)
     release.upload_asset(zipfile)
 
     print("Release URL is {}".format(release.html_url)
