@@ -45,10 +45,10 @@ def main():
     subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "source" + zipfile, directory], check=True)
 
     # remove all github and other not needed files for using IDF
-    shutil.rmtree()(directory + (os.path.sep) + ".git")
-    shutil.rmtree()(directory + (os.path.sep) + ".github")
-    shutil.rmtree()(directory + (os.path.sep) + ".gitlab")
-    shutil.rmtree()(directory + (os.path.sep) + ".docs")
+    shutil.rmtree(directory + "/.git", ignore_errors=True)
+    shutil.rmtree(directory + "/.github", ignore_errors=True)
+    shutil.rmtree(directory + "/.gitlab", ignore_errors=True)
+    shutil.rmtree(directory + "/.docs", ignore_errors=True)
 
     files = glob.glob(".*")
     for f in files:
@@ -85,3 +85,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
