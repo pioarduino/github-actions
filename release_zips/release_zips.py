@@ -50,13 +50,13 @@ def main():
     shutil.rmtree(directory + "/.gitlab", ignore_errors=True)
     shutil.rmtree(directory + "/docs", ignore_errors=True)
 
-    files = glob.glob(directory + ".*")
-    print("Files: " files)
-    for f in files:
+    print ("directory: ", directory)
+    fileList = glob.glob(directory + "/.*")
+    for filePath in fileList:
         try:
-            f.unlink()
-        except OSError as e:
-            print("Error: %s : %s" % (f, e.strerror))
+            os.remove(filePath)
+        except:
+            print("Error while deleting file : ", filePath)
 
     print("Zipping only needed files {}...".format(zipfile))
     subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", zipfile, directory], check=True)
