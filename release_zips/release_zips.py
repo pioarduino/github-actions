@@ -44,21 +44,11 @@ def main():
     print("Zipping github files into source-{}...".format(zipfile))
     subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "source-" + zipfile, directory], check=True)
 
-    # remove all github and other not needed files for using IDF
-    shutil.rmtree(directory + "/.git", ignore_errors=True)
-    shutil.rmtree(directory + "/.github", ignore_errors=True)
-    shutil.rmtree(directory + "/.gitlab", ignore_errors=True)
+    # remove docs
     shutil.rmtree(directory + "/docs", ignore_errors=True)
 
-    fileList = glob.glob(directory + "/.*")
-    for filePath in fileList:
-        try:
-            os.remove(filePath)
-        except:
-            print("Error while deleting file : ", filePath)
-
     print("Zipping only needed files into {}...".format(zipfile))
-    subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", zipfile, directory], check=True)
+    subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "-xr'!.*'", zipfile, directory], check=True)
 
     try:
         release = repo.get_release(tag)
