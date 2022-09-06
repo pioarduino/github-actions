@@ -48,7 +48,7 @@ def main():
     shutil.rmtree(directory + "/docs", ignore_errors=True)
 
     print("Zipping only needed files into {}...".format(zipfile))
-    subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "-xr'!.*'", zipfile, directory], check=True)
+    subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "-xr!.*", zipfile, directory], check=True)
 
     try:
         release = repo.get_release(tag)
