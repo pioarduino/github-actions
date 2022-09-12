@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Create a recursive clone source zip for a Release
-        uses: espressif/github-actions/release_zips@master
+        uses: Jason2866/github-actions/release_zips@master
         env:
             RELEASE_PROJECT_NAME: ESP-IDF
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
