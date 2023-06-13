@@ -40,6 +40,11 @@ def main():
     # note: it may be easier to use github's "checkout" action here, with the correct args
     subprocess.run(["git", "clone", "--recursive", "--branch", tag, git_url, directory], check=True)
 
+    # remove added extra components
+    shutil.rmtree(directory + "/components/esp-dsp", ignore_errors=True)
+    shutil.rmtree(directory + "/components/esp32-camera", ignore_errors=True)
+    shutil.rmtree(directory + "/components/esp_littlefs", ignore_errors=True)
+
     zipfile = "{}.zip".format(directory)
     print("Zipping github files into source-{}...".format(zipfile))
     subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "source-" + zipfile, directory], check=True)
