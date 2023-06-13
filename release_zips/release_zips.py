@@ -41,7 +41,7 @@ def main():
     subprocess.run(["git", "clone", "--recursive", "--branch", tag, git_url, directory], check=True)
 
     # remove added extra components
-    shutil.rmtree(directory + "/components/esp-dsp", ignore_errors=True)
+    shutil.rmtree(directory + "/components/esp_dsp", ignore_errors=True)
     shutil.rmtree(directory + "/components/esp32-camera", ignore_errors=True)
     shutil.rmtree(directory + "/components/esp_littlefs", ignore_errors=True)
 
