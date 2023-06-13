@@ -47,7 +47,7 @@ def main():
 
     zipfile = "{}.zip".format(directory)
     print("Zipping github files into source-{}...".format(zipfile))
-    subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "source-" + zipfile, directory], check=True)
+    subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "-xr!.*", "source-" + zipfile, directory], check=True)
 
     # remove docs
     shutil.rmtree(directory + "/docs", ignore_errors=True)
