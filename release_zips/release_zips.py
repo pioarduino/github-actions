@@ -44,15 +44,12 @@ def main():
     shutil.rmtree(directory + "/components/esp_dsp", ignore_errors=True)
     shutil.rmtree(directory + "/components/esp32-camera", ignore_errors=True)
     shutil.rmtree(directory + "/components/esp_littlefs", ignore_errors=True)
-
-    zipfile = "{}.zip".format(directory)
-    print("Zipping github files into source-{}...".format(zipfile))
-    subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "-xr!.*", "source-" + zipfile, directory], check=True)
-
     # remove docs
     shutil.rmtree(directory + "/docs", ignore_errors=True)
 
-    print("Zipping only needed files into {}...".format(zipfile))
+    zipfile = "{}.zip".format(directory)
+
+    print("Zip needed files into {}...".format(zipfile))
     subprocess.run(["/usr/bin/7z", "a", "-mx=9", "-tzip", "-xr!.*", zipfile, directory], check=True)
 
     try:
@@ -73,7 +70,6 @@ def main():
 
     print("Attaching zipfile(s)...")
     release.upload_asset(zipfile)
-    release.upload_asset("source-" + zipfile)
 
     print("Release URL is {}".format(release.html_url)
 )
