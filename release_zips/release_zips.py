@@ -72,8 +72,8 @@ def main():
                                           draft=True, prerelease=is_prerelease)
 
     print("Attaching zipfile(s)...")
-    release.upload_asset("source-" + zipfile)
     release.upload_asset(zipfile)
+    release.upload_asset("source-" + zipfile)
 
     print("Release URL is {}".format(release.html_url)
 )
