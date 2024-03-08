@@ -9,7 +9,6 @@ If you need to distribute source zip files containing a recursively cloned worki
 The difference between this zip file and the automatic zip file that GitHub allows you to download from any tag or release is:
 
 * This zip file is a recursive clone that includes all submodules.
-* This zip file is a valid Git working directory
 
 ## Creating a Release
 
