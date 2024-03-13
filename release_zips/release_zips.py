@@ -46,8 +46,8 @@ def main():
     shutil.rmtree(directory + "/components/esp_littlefs", ignore_errors=True)
     # remove docs
     shutil.rmtree(directory + "/docs", ignore_errors=True)
-    # remove examples
-    shutil.rmtree(directory + "/examples", ignore_errors=True)
+    # remove examples; enabling will brake Platformio Platform CI
+    #shutil.rmtree(directory + "/examples", ignore_errors=True)
 
     zipfile = "{}.zip".format(directory)
 
