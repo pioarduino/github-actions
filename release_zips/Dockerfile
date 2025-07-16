@@ -1,4 +1,7 @@
-FROM python:3.9-slim-buster
+FROM python:3.12-slim-bookworm
+
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 RUN apt-get update && apt-get install -y p7zip-full git && pip install PyGithub
 
